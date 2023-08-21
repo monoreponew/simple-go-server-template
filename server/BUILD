@@ -1,6 +1,6 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 load("@io_bazel_rules_docker//go:image.bzl", "go_image")
-load("@genrules_gcloud//:index.bzl", "gcloud_run_deploy", "gcloud_services_enable", "gcloud_auth_activate_refresh_token")
+load("@genrules_gcloud//:index.bzl", "gcloud_run_deploy", "gcloud_services_enable", "gcloud_auth", "gcloud_auth_print_access_token")
 load("@genrules_steps//:index.bzl", "steps")
 load("@genrules_crane//:index.bzl", "crane_auth_login", "crane_push")
 
@@ -25,6 +25,7 @@ go_image(
 steps(
     name="deploy",
     steps = [
+        ":access_token",
         ":gcr_login",
         ":push_image",
         ":enable_cloud_run",
@@ -32,11 +33,16 @@ steps(
     ],
 )
 
+gcloud_auth_print_access_token(
+    name = "access_token",
+    out = "~/access_token",
+)
+
 crane_auth_login(
     name = "gcr_login",
     registry = "gcr.io",
     user = "oauth2accesstoken",
-    password = "$CLOUDSDK_AUTH_ACCESS_TOKEN",
+    password = "$(cat ~/access_token)",
 )
 
 crane_push(
@@ -61,6 +67,6 @@ gcloud_run_deploy(
     allow_unauthenticated = True,
 )
 
-gcloud_auth_activate_refresh_token(
+gcloud_auth(
     name = "auth"
 )
