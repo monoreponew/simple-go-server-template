@@ -103,8 +103,8 @@ repo(
 repo(
     name = "genrules_gcloud",
     repo = "genrules/gcloud",
-    commit = "0749fdd9ccf11bb2719042bfd6b8725b5a3d4c3a",
-    sha = "d4f771cb42812c812972aed024a47e08b2f101add47b5ca3c6b277e5061e2d6c",
+    commit = "43923b555bf124fe80390a639b7b527df98c9867",
+    sha = "1d975dcb0cfdbac63d941e734df70b9129941610fc067575eff43b4788159b0d",
 )
 
 repo(

@@ -4,8 +4,6 @@ actions:
       push:
         branches:
           - "main"
-      pull_request:
-        branches:
-          - "*"
     bazel_commands:
+      - "run server:auth --config=workflows"
       - "run server:deploy --config=workflows"
