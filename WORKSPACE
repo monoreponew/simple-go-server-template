@@ -82,50 +82,21 @@ register_toolchains(
     "@zig_sdk//toolchain:windows_arm64",
 )
 
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
 http_archive(
-    name="genrules_repo",
+    name="genrules",
     urls=[
-        "https://github.com/genrules/repo/archive/db55ffef95c491f29e808122d3c1b297b0ca2096.zip",
+        "https://github.com/genrules/genrules/archive/76e958eb62274fb3ce019da026ff3c9e755bef23.zip",
     ],
-    strip_prefix="repo-db55ffef95c491f29e808122d3c1b297b0ca2096",
-    sha256="7c9db19e616d7646ea3ee84d2b863a203f80be11ba3d8b6ac17bca3868317e82",
+    strip_prefix="genrules-76e958eb62274fb3ce019da026ff3c9e755bef23",
+    sha256="cb62c387bb990f5846a8cd4d2d5e5ff8232557ac4cbe8fb97e646862f4d454a7",
 )
 
-load("@genrules_repo//:index.bzl", "repo")
-
-repo(
-    name = "genrules_steps",
-    repo = "genrules/steps",
-    commit = "befb6a3133bc20ae6320d7bbe88c545a637199fe",
-    sha = "b28e85eca74619cf9dc88472d314e794cfadf99e4079f6a4b71571c112e5d085",
-)
-
-repo(
-    name = "genrules_gcloud",
-    repo = "genrules/gcloud",
-    commit = "4da509a12c1b635ffa38023e151d017e9801d5ba",
-    sha = "06eb5f37ce7816062a4046d7ada6de1f81e6594d439295bf9c1e17379978ae4c",
-)
-
-repo(
-    name = "genrules_crane",
-    repo = "genrules/crane",
-    commit = "e04e1cacba0deccfcc4128c4e6f3a90a8ebd1628",
-    sha = "da553feb05a2bae6c04d8ed1a23d3c46d5f092b02fe87daa6fbfdbe493742a3d",
-)
-
-load("@genrules_gcloud//:deps.bzl", "gcloud_deps")
-
-gcloud_deps()
-
-load("@genrules_gcloud//:index.bzl", "gcloud_download")
+load("@genrules//gcloud:index.bzl", "gcloud_download")
 
 gcloud_download()
 
-load("@genrules_crane//:deps.bzl", "crane_deps")
-
-crane_deps()
-
-load("@genrules_crane//:index.bzl", "crane_download")
+load("@genrules//crane:index.bzl", "crane_download")
 
 crane_download()

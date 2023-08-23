@@ -1,8 +1,8 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 load("@io_bazel_rules_docker//go:image.bzl", "go_image")
-load("@genrules_gcloud//:index.bzl", "gcloud_run_deploy", "gcloud_services_enable", "gcloud_auth", "gcloud_auth_print_access_token")
-load("@genrules_steps//:index.bzl", "steps")
-load("@genrules_crane//:index.bzl", "crane_auth_login", "crane_push")
+load("@genrules//gcloud:index.bzl", "gcloud_run_deploy", "gcloud_services_enable", "gcloud_auth", "gcloud_auth_print_access_token")
+load("@genrules//steps:index.bzl", "steps")
+load("@genrules//crane:index.bzl", "crane_auth_login", "crane_push")
 
 go_library(
     name = "lib",
