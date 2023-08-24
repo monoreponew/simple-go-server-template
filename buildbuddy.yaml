@@ -5,5 +5,4 @@ actions:
         branches:
           - "main"
     bazel_commands:
-      - "run server:auth --config=workflows"
       - "run server:deploy --config=workflows"
