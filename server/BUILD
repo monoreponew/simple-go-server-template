@@ -26,7 +26,7 @@ go_image(
 run_all(
     name="deploy",
     steps = [
-        ":auth_if_needed",
+        ":auth",
         ":access_token",
         ":gcr_login",
         ":push_image",
@@ -67,12 +67,6 @@ gcloud_run_deploy(
     region = "us-west1",
     project = "$GCP_PROJECT",
     allow_unauthenticated = True,
-)
-
-run_if(
-    name = "auth_if_needed",
-    not_empty = "$CLOUDSDK_AUTH_REFRESH_TOKEN",
-    then = ":auth",
 )
 
 gcloud_auth(
