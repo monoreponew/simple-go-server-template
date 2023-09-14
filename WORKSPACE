@@ -87,9 +87,9 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 http_archive(
     name="genrules",
     urls=[
-        "https://github.com/genrules/genrules/archive/a86fa0f17aded5f12a3c26d63575695fc40545b2.zip",
+        "https://github.com/genrules/genrules/archive/d39a1df2e072c6498ae23383da9ffc6149e0c916.zip",
     ],
-    strip_prefix="genrules-a86fa0f17aded5f12a3c26d63575695fc40545b2",
+    strip_prefix="genrules-d39a1df2e072c6498ae23383da9ffc6149e0c916",
 )
 
 load("@genrules//gcloud:index.bzl", "gcloud_download")
