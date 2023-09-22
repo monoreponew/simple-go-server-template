@@ -21,6 +21,7 @@ go_image(
 )
 
 deploy(
-    name="go_service",
-    target=":go_image",
+    name = "go_service",
+    target = ":go_image",
+    port = "3333",
 )
