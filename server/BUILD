@@ -22,5 +22,5 @@ go_image(
 
 deploy(
     name="go_service",
-    target=":server_image",
+    target=":go_image",
 )
