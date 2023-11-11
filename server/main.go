@@ -6,11 +6,14 @@ import (
 	"net/http"
 )
 
+const port = ":3333"
+
 func main() {
 	http.HandleFunc("/", index)
 
-	err := http.ListenAndServe(":3333", nil)
-	if err != nil {
+	log.Printf("Server listening on port %s", port)
+
+	if err := http.ListenAndServe(port, nil); err != nil {
 		log.Fatal(err)
 	}
 }

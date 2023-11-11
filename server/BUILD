@@ -1,5 +1,4 @@
-load("@rules_go//go:def.bzl", "go_binary", "go_library")
-#load("@io_bazel_rules_docker//go:image.bzl", "go_image")
+load("@rules_go//go:def.bzl", "go_binary", "go_library", "go_cross_binary")
 load("@genrules//google_cloud_run:index.bzl", "deploy")
 
 go_library(
@@ -15,29 +14,14 @@ go_binary(
     visibility = ["//visibility:public"],
 )
 
-# crane(
-#     name = "go_image",
-#     # command = "append -f $< -b gcr.io/distroless/static-debian11 -t go_image -o $@",
-#     command = "append -f $< -b debian -t go_image -o $@",
-#     compile = True,
-#     deps = [":tar"],
-# )
-
-# crane(
-#     name = "mutate",
-#     command = "mutate -a --cmd=./server/server_/server -o $@ $<",
-#     compile = True,
-#     deps = [":go_image"],
-# )
-
-
-#go_image(
-#    name = "go_image",
-#    binary = ":go",
-#)
+go_cross_binary(
+    name = "server_linux_amd64",
+    platform = "@rules_go//go/toolchain:linux_amd64",
+    target = ":server",
+)
 
 deploy(
     name = "go_service",
-    binary = ":server",
+    binary = ":server_linux_amd64",
     port = "3333",
 )
