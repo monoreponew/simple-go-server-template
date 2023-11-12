@@ -9,7 +9,7 @@ actions:
         branches:
           - "*"
     bazel_commands:
-        - "build //..."
+        - "build //... --config=workflows"
   - name: "Deploy"
     triggers:
       push:

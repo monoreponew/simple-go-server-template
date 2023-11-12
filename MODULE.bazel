@@ -1,7 +1,2 @@
 bazel_dep(name = "rules_go", version = "0.41.0")
-bazel_dep(name = "genrules", version = "0.2")
-
-[use_repo(use_extension("@genrules//{0}:index.bzl".format(d), "configure"), d) for d in [
-    "crane", 
-    "gcloud"
-]]
+bazel_dep(name = "genrules", version = "0.3")
