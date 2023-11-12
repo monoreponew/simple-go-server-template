@@ -1,17 +1,15 @@
-load("@rules_go//go:def.bzl", "go_binary", "go_library", "go_cross_binary")
+load("@rules_go//go:def.bzl", "go_library", "go_binary", "go_cross_binary")
 load("@genrules//google_cloud_run:index.bzl", "deploy")
 
 go_library(
     name = "lib",
     srcs = ["main.go"],
-    importpath = "foo",
-    visibility = ["//visibility:private"],
+    importpath = "server",
 )
 
 go_binary(
     name = "server",
     embed = [":lib"],
-    visibility = ["//visibility:public"],
 )
 
 go_cross_binary(

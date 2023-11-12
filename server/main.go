@@ -1,19 +1,23 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"io"
 	"log"
 	"net/http"
 )
 
-const port = ":3333"
+var port = flag.Int("port", 3333, "The port that the server should listen on. Defaults to port 3333.")
 
 func main() {
+	flag.Parse()
+
 	http.HandleFunc("/", index)
 
-	log.Printf("Server listening on port %s", port)
+	log.Printf("Server listening on port %d", *port)
 
-	if err := http.ListenAndServe(port, nil); err != nil {
+	if err := http.ListenAndServe(fmt.Sprintf(":%d", *port), nil); err != nil {
 		log.Fatal(err)
 	}
 }
